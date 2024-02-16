@@ -1,65 +1,28 @@
-/* Executing javascript with Node
+const path = require("node:path");
 
-1. NODE REPL
-Read
-Evaluate
-Print
-Loop
+// console.log(path.basename(__filename));
+// console.log(path.basename(__dirname));
+// console.log(path.extname(__filename));
+// console.log(path.extname(__dirname));
 
-2. Executing code in a JavaScript file in the command line */
+// console.log(path.parse(__filename));
 
-// too add module into another file  use require function that is always available in node
-// const add = require("./add");
-const SuperHero = require("./super-hero");
-const math = require("./math");
-const data = require("./data.json");
+// console.log(path.format(path.parse(__filename)));
 
-const { add, subtract } = math;
+// console.log(path.isAbsolute(__filename));
 
-/* Module is an encapsulated and reusable chunk of code that has its own context 
+// console.log(path.join("folder1", "folder2", "index.html"));
 
-In Node.js each file is treated as a separate Module
+// console.log(path.join("folder1", "folder2", "../index.html"));
 
-Types of Module
-1. Local Module - Modules that we create in our application
-2. Built-in-Module - Modules that Node.js ships with out of the box
-3, Third party modules - Modules written by other developers that we can use in our application 
-  
-each file is a module that is isolated by default */
+//this will give full absolute path to json
 
-// It's always good to split javascript programs into seprate modules that can be imported when needed
+console.log(__dirname, "data.json");
 
-/* CommonJs;
+console.log(path.resolve("folder1", "folder2", "index.html"));
+console.log(path.resolve("/folder1", "/folder2", "/index.html"));
+console.log(path.resolve("/folder1", "//folder2", "/index.html"));
 
-CommonJs is a standard that states how a module should be structured and shared */
+console.log(path.resolve("/folder1", "//folder2", "../index.html"));
 
-// const sum = add(5, 4);
-// console.log(sum);
-
-// Each module in Node.js has its own scope, the way node achieve this is by iife immediately invokedfunction expression
-// Before a module code is executed, node.js will wrap it with function wrapper that provides module scope
-//There is proper encapsulation and resuability is unaffected
-require("./batman");
-require("./superman");
-
-/* MODULE WRAPPER 
-
-Every module in Node.js get wrapped in an IIFE before loaded
-IIFE helps keep top level variable and functions scoped to the module rather than the global object 
-The IIFE that wraps every module contains 5 parameters which are pretty important for the functioning of a module */
-
-const batMan = new SuperHero("BatMan");
-console.log(batMan.getName());
-
-/* MODULE CACHING 
-
-In node.js when we require a new module it is loaded and cached for subsequent loading */
-console.log(add(5, 5));
-console.log(subtract(5, 5));
-
-/* CommonJS
-Each file treated as module */
-
-/* WATCH MODE
-Running in watch mode  restart the process whenever changes in the file */
-console.log(data.address.street);
+// Path is a built-in module that provides utilities to work with file and sirectory pathr
