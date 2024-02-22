@@ -12,11 +12,15 @@ const emitter = new EventEmitter();
 //register event listeners using the one method
 //also register multiple listeners for the same event
 emitter.on("order-pizza,", (size, topping) => {
-  console.log(`Oreder received! Baking a ${size} pizza with ${topping}`);
+  console.log(`Order received! Baking a ${size} pizza with ${topping}`);
 });
 
 emitter.on("order-pizza,", (size) => {
-  console.log("serving complimentary drink");
+  if (size == "large") {
+    console.log("serving complimentary drink");
+  }
 });
 
 emitter.emit("order-pizza", "large", "Chicken feast");
+
+module.exports = EventEmitter;
