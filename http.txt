@@ -1,0 +1,15 @@
+Hypertext Tranfer Protocol
+
+A protocol that defines a format for clients and servers to speak each other
+
+The client sends an HTTP request and the server responds with an HTTP response 
+
+we can create a web server using node.js 
+
+Node.js has access to operating system functionality like networking 
+
+Node has an event loop to run task asynchronously and is perfect for creating web servers that can simultaneously handle large volumes of requests 
+
+node server we create should still respect the HTTP format  
+
+HTTP module allows creation of web servers that can transfer data over HTTP 
