@@ -1,1 +1,1 @@
-Hello gang this is from File.txt
+Hello gang this is from pipe method using zlib module

@@ -1,6 +1,6 @@
 /* The events module us to work with events in Node.js 
  An event is an action or an occurance that has happened in our application that we can respond to 
- Using the events module, we can dispatch out own custom events and respond to those custome event in a non-blocking manner 
+ Using the events module, we can dispatch out own custom events and respond to those custom event in a non-blocking manner 
  Event is a built-in module that allows to work with event in node  */
 //this import returns a event evmitter  class
 const EventEmitter = require("node:events");
