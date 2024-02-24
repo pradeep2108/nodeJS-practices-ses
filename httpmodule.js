@@ -5,20 +5,30 @@ const fs = require("node:fs");
 // request argument contains information about the incoming request
 // we use it to build the response that has to be sent back to the client
 const server = http.createServer((req, res) => {
-  const superHero = {
-    firstName: "Bruce",
-    lastName: "Wayne",
-  };
-  const name = "Juice Wrld";
-
-  res.writeHead(200, { "content-Type": "text:html" });
-
-  let html = fs.readFileSync("./index.html", "utf-8");
-  html = html.replace("{{name}}", name);
-  console.log(req);
-  res.end(html);
-
-  //   fs.createReadStream(__dirname + "./index.html").pipe(res);
+  //req.url gives us the query string
+  //requ.method GET POST PUT DELETE
+  if (req.url === "/") {
+    res.writeHead(200, { "Content-type": "text/plain" });
+    res.end("Home Page");
+  } else if (req.url === "/about") {
+    res.writeHead(200, { "Content-type": "text/plain" });
+    res.end("Welcome to our company about");
+  } else if (req.url === "/product") {
+    res.writeHead(200, { "Content-type": "text/plain" });
+    res.end("List of Products");
+  } else if (req.url === "/api") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(
+      JSON.stringify({
+        firstName: "Jarad",
+        lastName: "Higgins",
+      })
+    );
+  } else {
+    res.writeHead(404);
+    res.end("Page Not Found");
+  }
+  //   res.end(req.url);
 });
 
 server.listen(3000, () => {
