@@ -1,0 +1,84 @@
+What is libuv?
+- libuv is a cross platform open source library written in C language
+
+why libuv?
+- handles asynchronous non-blocking operations in Node.js
+
+how?
+- Thread pool 
+- Event loop
+
+libuv Thread pool is a pool of threads that node.js uses to offload time-consuming tasks and ensure main thread is not blocked for a long time 
+
+crypto module uses libuv thread pool for some of its method 
+
+- A few async methods like fs.readFile and crypto.pbkdf2 run on a seprate thread in libuv's thread pool. They do run synchronously in their own thread but as far as the  main thread is concerned, it appears as if the method is running asynchronously
+
+Libuv's thread pool has 4 threads by default 
+
+By increasing the thread pool size, we are able to improve the total time taken to run multiple call of an asynchronous method like pbkdf2
+
+increasing the thread pool size can improve performance but that is limited by the number of CPU core
+
+Libuv and Async Methods Summary
+
+- In Node.js, async methods are handled by libuv
+
+- They are handled in two different ways
+
+1. Native async mechanism
+2. Thread pool
+
+- Whenever possible, Libuv will use native async mechanisms in the OS so as to avoid blocking the main thread
+
+- Since this is part of the kernel, there is different mechanism for each OS. We have epoll for Linux, Kqueue for MacOS and IO Completion Port on Windows
+
+- Relying on native async mechanisms makes Node scalable as the only limitation is the operating system kernel
+
+- Example of this type is a network I/O operation
+
+
+EVENT loop
+
+Its's a C program and is part of libuv
+
+A design pattern that orchestrates or co-ordinates the execution of synchronous and asynchronous code in Node.js
+
+
+EVENT loop - Execution Order
+
+- User written synchronous JavaScript code takes priority over async code that the runtime like to execute 
+
+1. Any callbacks in the micro task queues are executed. First, tasks in the nextTick queue and only then tasks in the promise queue
+
+2. All callbacks within the timer queue are executed
+
+3. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue
+
+4. All callbacks within the I/O queue are executed
+
+5. Callbacks in the micro task queues if present are executed. nextTick queue followed by Promise queue.
+
+6. All callbacks in the check queue are executed
+
+7. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue
+
+8. All callbacks in the close queue are executed
+
+9. For one final time in the same loop, the micro task queues are executed. nextTick queue followed by promise queue.
+
+process.nextTick()
+
+- Use of process.nextTick is discouraged as it can   cause the rest of the event loop
+to starve
+
+If you endlessly call process.nextTick. the control will never make it past the microtask queue
+
+Two main reasons to use process.nextTick
+
+1. To allow users to handle errors, cleanup any then unneeded resources, or perhaps try the request again before the event loop continues
+2. To allow a callback to run after the call stack has unwound but before the event loop continues
+
+- Callbacks in microtask queues are executed in between the execution of callbacks in the timer queue
+
+- Timer Queue are executed in FIFO order
