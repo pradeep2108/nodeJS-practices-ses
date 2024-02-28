@@ -82,3 +82,11 @@ Two main reasons to use process.nextTick
 - Callbacks in microtask queues are executed in between the execution of callbacks in the timer queue
 
 - Timer Queue are executed in FIFO order
+
+*** I/O queue ***
+
+Most of the async methods from built-in modules queue the callback function in the I/O queue
+
+fs.readFile()
+
+When running setTimeout with delay 0ms and an I.O async method, the order of execution can never be guranteed 
