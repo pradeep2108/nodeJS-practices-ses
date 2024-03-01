@@ -1,0 +1,24 @@
+What is npm?
+
+1. It is the world largest software library(registry) 
+
+npm is a software library 
+
+npm is a library or registry which contains code packages written by various developers 
+
+It is a large public database of javaScript code that developers from all over the world can use to share and borrow code  
+
+
+If we author a "code package", you can publish it to the npm registry for others to use 
+
+
+Like npm Other package managers such as pnpm and yarn 
+npm is the default package manager for Node.js
+
+What is package.json?
+ package.json is npms configuration file 
+
+ It is a json file that typically lives in the root directory of your package and holds various metadata relevant to the package 
+
+ npm init
+ npm init --yes

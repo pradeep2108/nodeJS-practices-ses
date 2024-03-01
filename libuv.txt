@@ -90,3 +90,27 @@ Most of the async methods from built-in modules queue the callback function in t
 fs.readFile()
 
 When running setTimeout with delay 0ms and an I.O async method, the order of execution can never be guranteed 
+
+
+*** Event Loop Summary ***
+
+The event loop is a C program that orchestrates or co-ordinates the execution of synchronous and asynchronous code in Node,js
+
+It co-ordinates the execution of callbacks in seix different queues
+
+They are nextTick, Promise, time, I/O check and close queues 
+
+*** Event Loop Summary contd ***
+
+We use process.nectTick() method to queue into the nextTick queue
+
+We resolve or reject a Promise to queue into the Promise queue
+
+We use seTimeOut or seetInterval to queue into the timer queue
+Execute an async method to queue into the I/O queue 
+
+Use setImmefiate function to queue into the check queue and finally 
+
+Attach close listeners to queue into the close queue
+
+nextTick and Promise queues are executed in between each queue and also in between each callback execution int the time and check queues
